@@ -1,0 +1,114 @@
+.App {
+  text-align: center;
+}
+
+.icon { margin-right: 8px; /* Adjust the value as needed */ }
+
+.custom-img { height: calc(100vh - 50px); /* Adjust 56px to account for any header/footer you might have */ 
+  object-fit: cover; /* Ensure the image covers the entire area */ 
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.service-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  margin: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+}
+.home-bg-image{
+  background-image: url('./assets/Backgrounds/Home.jpg'); 
+}
+.services-bg-image{
+  background-image: url('./assets/Backgrounds/Services.jpg'); 
+}
+.testinomials-bg-image{
+  background-image: url('./assets/Backgrounds/Testinomials.jpg'); 
+}
+
+.contactUs-bg-image{
+  background-image: url('./assets/Backgrounds/ContactUs.jpg'); 
+}
+
+
+
+.bg-container {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* .not-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.not-found img {
+  max-width: 100%;
+  height: auto;
+} */
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
