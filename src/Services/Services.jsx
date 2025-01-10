@@ -18,7 +18,6 @@ function Services(){
     },[])
 
     const addToCart = (id) => {
-        alert(id);
             fetch(`${BASEURL}/cart/save`, {
                 method: 'POST',
                 headers: {

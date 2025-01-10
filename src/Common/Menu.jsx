@@ -28,6 +28,12 @@ function Menu() {
                 <button className={`btn m-2 ${isActive('/testinomials') ? 'btn-primary' : 'btn-light'}`} onClick={() => navigateTo('/testinomials')}>
                     <BookOpen size={15} className="icon" />Testinomials
                 </button>
+                <button className={`btn m-2 ${isActive('/addDog') ? 'btn-primary' : 'btn-light'}`} onClick={() => navigateTo('/addDog')}>
+                    <BookOpen size={15} className="icon" />Add Dog
+                </button>
+                <button className={`btn m-2 ${isActive('/selectDog') ? 'btn-primary' : 'btn-light'}`} onClick={() => navigateTo('/selectDog')}>
+                    <BookOpen size={15} className="icon" />Select Dog
+                </button>
                 <button className={`btn m-2 ${isActive('/account') ? 'btn-primary' : 'btn-light'}`} onClick={() => navigateTo('/account')}>
                     <User size={15} className="icon" />Account
                 </button>
