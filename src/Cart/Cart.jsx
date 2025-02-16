@@ -2,17 +2,18 @@ import { useState, useEffect } from 'react';
 import Menu from "../Common/Menu";
 import CartBox from './CartBox';
 import { BASEURL } from '../Constants/Constants';
+import Checkout from './Checkout';
 
-function Cart (){
+function Cart (props){
     const [details , setDetails] = useState([]);
     const [message, setMessage] = useState("No items in cart");
 
     useEffect(()=>{
-        fetch(`${BASEURL}/cart/getServicesByUserStatus?userId=${1}&status=ADDED`)
+        fetch(`${BASEURL}/cart/getServicesByUserStatus?userId=${props.userId}&status=ADDED`)
         .then(response => response.json())
         .then(data => {
             if(data.length==0){
-                setMessage("No items in cart");
+                // setMessage("No items in cart");
             } else{
                 setDetails(data)
             }
@@ -30,7 +31,8 @@ function Cart (){
         .then(response => response.json())
         .then(data => {
                 setDetails(data);
-                if(data.length==0) setMessage("No items in cart");
+                // if(data.length==0) 
+                    // setMessage("No items in cart");
             })
          .catch((error) => {
             console.error('Error:', error);
@@ -38,7 +40,7 @@ function Cart (){
     }
 
     const checkoutServices = () => {
-        fetch(`${BASEURL}/cart/checkoutServices?userId=${1}`, {
+        fetch(`${BASEURL}/cart/checkoutServices?userId=${props.userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +49,7 @@ function Cart (){
         .then(response => response.json())
         .then(data => {
             setDetails(data);
-            setMessage("Services are submitted");
+            setMessage("cart Services are submitted");
             })
         .catch(error => console.error('Error while saving data:', error));
 
@@ -66,6 +68,7 @@ return (
         </div>
         {details?.length>0 ? <button className="btn btn-primary mt-3" onClick={() => checkoutServices()}>Checkout</button> :
         <p>{message}</p>}
+        <Checkout userId={props.userId}/>
     </div>
 )
 

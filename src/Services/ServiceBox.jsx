@@ -5,7 +5,7 @@ import grooming from '../assets/Services/grooming.jpg';
 import swimming from '../assets/Services/swimming.jpg';
 import daycare from '../assets/Services/daycare.jpg';
 
-const ServiceBox = ({ id, title, description, imageId, price, addToCart, idList }) => {
+const ServiceBox = ({ id, title, description, imageId, price, addToCart, cartList, checkoutList }) => {
     const [image, setImage] = useState();
     useEffect(() => {
         switch(imageId) {
@@ -35,8 +35,8 @@ const ServiceBox = ({ id, title, description, imageId, price, addToCart, idList 
             <h3 className="h5">{title}</h3>
             <p>{description}</p>
             <p className="font-weight-bold">&#8377; {price}</p>
-            {idList.indexOf(id)<0 ? <button className="btn btn-primary" onClick={() => addToCart(id)}>Book Now</button>
-            :<button className="btn btn-primary" disabled>Added to cart</button>}
+            {cartList.indexOf(id)<0  && checkoutList.indexOf(id)<0 ? <button className="btn btn-primary" onClick={() => addToCart(id)}>Book Now</button>
+            :cartList.indexOf(id)<0 ? <button className="btn btn-primary" disabled>You have opted for service</button>: <button className="btn btn-primary" disabled>Added to cart</button>}
         </div>
         </div>
     );
