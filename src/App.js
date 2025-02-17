@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Services from './Services/Services';
 import NotFound from './NotFound/NotFound';
 import ContactUs from './ContactUs/ContactUs';
-// import Account from './Cart/Checkout';
+import Account from './Account/Account';
 import Testinomials from './Testinomials/Testinomials';
 import Cart from './Cart/Cart';
 import AddDog from './DogBoarding/AddDog';
@@ -36,10 +36,10 @@ function App() {
           <Route path="/services" element={<PrivateRoute element={Services} />} /> 
           <Route path="/cart" element={<PrivateRoute element={Cart} />} />
            <Route path="/testinomials" element={<PrivateRoute element={Testinomials } />} />
-            {/* <Route path="/account" element={<PrivateRoute element={Account} />} />  */}
+            <Route path="/account" element={<PrivateRoute element={Account} />} /> 
             <Route path="/contactUs" element={<PrivateRoute element={ContactUs} />} /> 
-            <Route path="/addDog" element={<PrivateRoute element={() => <AddDog addDog={addDog} dogs={dogs}/>} />} /> 
-            <Route path="/selectDog" element={<PrivateRoute element={()=> <DogSelectionForm dogs={dogs} />} />} /> 
+            {/* <Route path="/addDog" element={<PrivateRoute element={() => <AddDog addDog={addDog} dogs={dogs}/>} />} />  */}
+            {/* <Route path="/selectDog" element={<PrivateRoute element={()=> <DogSelectionForm dogs={dogs} />} />} />  */}
             <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

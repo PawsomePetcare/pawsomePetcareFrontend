@@ -12,11 +12,11 @@ function Checkout(props) {
     const [modalImage, setModalImage] = useState('');
 
     useEffect(() => {
-        fetch(`${BASEURL}/cart/getServicesByUserStatus?userId=${props.userId}&status=COMPLETED`)
+        fetch(`${BASEURL}/cart/getServicesByUserStatus?userId=${props.userId}&status=BOOKED`)
             .then(response => response.json())
             .then(data => {
                 if (data.length === 0) {
-                    // setMessage("You haven't booked any services");
+                    setMessage("You haven't booked any services");
                 } else {
                     setDetails(data);
                 }
@@ -41,11 +41,9 @@ function Checkout(props) {
         .catch(error => console.error('Error while saving data:', error));
     };
 
-    const handleClose = () => setShowModal(false);
-
     return (
         <div className="container mt-5">
-            
+            <h3>Booking orders</h3>
             <div>
                 {details?.map((detail, index) => {
                     return (
@@ -53,20 +51,6 @@ function Checkout(props) {
                     );
                 })}
             </div>
-            {details?.length > 0 ? <button className="btn btn-primary mt-3" onClick={checkoutServices}>Book</button> :
-                <p>{message}</p>}
-            
-            <Modal className="modal-dialog modal-sm" show={showModal} onHide={handleClose}>
-                <Modal.Header>
-                    <Modal.Title>Payment</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <img src={QrPayment} alt="Booking" className="img-fluid" style={{ width: '100%', height: 'auto' }} />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>Close</Button>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 }

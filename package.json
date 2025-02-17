@@ -6,6 +6,8 @@
     "@coreui/react": "^5.4.1",
     "@iconscout/react-unicons": "^2.2.1",
     "@iconscout/react-unicons-solid": "^1.1.2",
+    "@react-google-maps/api": "^2.20.6",
+    "animate.css": "^4.1.1",
     "cra-template": "1.2.0",
     "css-loader": "^7.1.2",
     "emailjs-com": "^3.2.0",

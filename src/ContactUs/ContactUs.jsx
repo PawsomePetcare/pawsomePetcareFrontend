@@ -3,6 +3,7 @@ import emailjs from 'emailjs-com';
 import Menu from '../Common/Menu';
 import Footer from '../Common/Footer';
 import SocialConnections from './SocialConnections';
+import GoogleMap from './GoogleMap';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -96,6 +97,7 @@ const ContactUs = () => {
             </form>
         </div>
             <SocialConnections/>
+            {/* <GoogleMap/> */}
         <Footer/>
         </div>
     );
