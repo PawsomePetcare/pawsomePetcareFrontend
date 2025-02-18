@@ -3,7 +3,6 @@ import emailjs from 'emailjs-com';
 import Menu from '../Common/Menu';
 import Footer from '../Common/Footer';
 import SocialConnections from './SocialConnections';
-import GoogleMap from './GoogleMap';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -97,6 +96,8 @@ const ContactUs = () => {
             </form>
         </div>
             <SocialConnections/>
+            
+            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31111.68433280033!2d77.62522305100914!3d12.910257643548075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1491bfdc6ecd%3A0xf232718439fbc879!2sHSR%20Layout%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1739805051114!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
             {/* <GoogleMap/> */}
         <Footer/>
         </div>
