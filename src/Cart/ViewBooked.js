@@ -44,11 +44,17 @@ function ViewBooked(props) {
 
     return (
         <div className="container mt-5">
-            <h3>Booking orders</h3>
+           
             <div>
                 {details?.map((detail, index) => {
                     return (
-                        <ViewCart id={detail.serviceId} key={index} title={detail.title} description={detail.description} imageId={detail.imageId} price={detail.price} userId={detail.userId} removeApplicable={false} />
+                        <ViewCart id={detail.serviceId} key={index} title={detail.title} description={detail.description}
+                         imageId={detail.imageId} price={detail.price} userId={detail.userId}
+                         total={detail.total}
+                         checkinDate={detail.checkinDate}
+                         checkoutDate={detail.checkoutDate}
+                         quantity={detail.quantity}
+                          removeApplicable={false} />
                     );
                 })}
             </div>

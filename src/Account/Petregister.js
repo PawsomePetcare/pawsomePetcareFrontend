@@ -49,7 +49,7 @@ function PetRegister({ addPet, userId }) {
 
     return (
         <div className="container mt-5">
-            <h2>Register Your Pet</h2>
+
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Pet Name</label>

@@ -6,6 +6,7 @@ import Checkout from "../Cart/Checkout";
 import backgroundImage from '../assets/Backgrounds/Home.jpg'; 
 import './Account.css'; 
 import ViewBooked from "../Cart/ViewBooked";
+import UserDetails from "./UserDetails";
 
 const Account = (props) => {
     const [pets, setPets] = useState([]);
@@ -32,6 +33,10 @@ const Account = (props) => {
                 <div className="account-box">
                     <h3>Pet Details</h3>
                     <PetDetails pets={pets} updatePet={updatePet} userId={props.userId} />
+                </div>
+                <div className="account-box">
+                    <h3>User Details</h3>
+                    <UserDetails userId={props.userId} />
                 </div>
                 <div className="account-box">
                     <h3>Booked Services</h3>

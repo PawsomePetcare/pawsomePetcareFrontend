@@ -71,7 +71,9 @@ function CartCheckout(props) {
             const endDate = new Date(item.checkoutDate);
             const timeDiff = endDate.getTime() - startDate.getTime();
             const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            total += item.price * daysDiff * item.quantity;
+            item.total = item.price * daysDiff * item.quantity;
+            item.days = daysDiff;
+            total += item.total;
         });
         setTotalCharges(total);
     };
@@ -83,10 +85,11 @@ function CartCheckout(props) {
 
     const completeServices = () => {
         fetch(`${BASEURL}/cart/checkoutServices?userId=${props.userId}`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify(cartDetails),
         })
         .then(response => response.json())
         .then(data => {
@@ -94,18 +97,7 @@ function CartCheckout(props) {
             setCartMessage("No items in cart");
             setCheckoutDetails(data);
             setCheckoutMessage("Checkout Services are booked");
-
-            fetch(`${BASEURL}/cart/completedServices?userId=${props.userId}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                setShowModal(false);
-            })
-            .catch(error => console.error('Error while saving data:', error));
+            setShowModal(false);
         })
         .catch(error => console.error('Error while saving data:', error)); 
     };
@@ -140,7 +132,7 @@ function CartCheckout(props) {
                 ) : (
                     <p>{cartMessage}</p>
                 )}
-            </div>
+            </div>  
             <div>
                 {/* <h3>Booked Services</h3>
                 {checkoutDetails?.map((detail, index) => (
@@ -155,9 +147,8 @@ function CartCheckout(props) {
                         userId={detail.userId} 
                     />
                 ))}
-                {checkoutDetails.length === 0 && <p>{checkoutMessage}</p>*/}
+                {checkoutDetails.length === 0 && <p>{checkoutMessage}</p>} */}
             </div> 
-
             <Modal className="modal-dialog modal-sm" show={showModal} onHide={handleClose}>
                 <Modal.Header>
                     <Modal.Title>Payment</Modal.Title>

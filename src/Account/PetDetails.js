@@ -32,7 +32,7 @@ function PetDetails({ pets, updatePet, userId }) {
         .then(response => response.json())
         .then(updatedPet => {
             alert('Pet updated successfully');
-            updatePet(updatedPet); // Update the pet in the parent component
+            updatePet(updatedPet);
             setShowModal(false);
             setSelectedPet(null);
         })
@@ -46,7 +46,6 @@ function PetDetails({ pets, updatePet, userId }) {
 
     return (
         <div className="container mt-5">
-            <h2>Registered Pets</h2>
 
             <div>
             {pets.length==0 && <h5>No pets are regsitered</h5>}

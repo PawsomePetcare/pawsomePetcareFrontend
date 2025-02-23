@@ -4,14 +4,13 @@ import boarding from '../assets/Services/boarding.jpg';
 import grooming from '../assets/Services/grooming.jpg';
 import swimming from '../assets/Services/swimming.jpg';
 import daycare from '../assets/Services/daycare.jpg';
-import { Form } from 'react-bootstrap';
 import './CartBox.css'; // Import the CSS file
 
-const ViewCart = ({ id, title, description, imageId, price, removeFromCart, userId, removeApplicable, checkinDate, checkoutDate, quantity, updateCartDetail }) => {
+const ViewCart = ({ id, title, description, imageId, price, removeFromCart, userId, removeApplicable, checkinDate, checkoutDate, quantity, updateCartDetail, total }) => {
     const [image, setImage] = useState();
 
     useEffect(() => {
-        switch(imageId) {
+        switch (imageId) {
             case 'boarding':
                 setImage(boarding);
                 break;
@@ -29,6 +28,14 @@ const ViewCart = ({ id, title, description, imageId, price, removeFromCart, user
         }
     }, [imageId]);
 
+    const formatDate = (dateStr) => {
+        const date = new Date(dateStr);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
     return (
         <div className="card mb-3 cart-box">
             <div className="row g-0">
@@ -39,13 +46,28 @@ const ViewCart = ({ id, title, description, imageId, price, removeFromCart, user
                     <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <p className="card-text">{description}</p>
-                        {/* <p className="card-text"><strong>&#8377; {price}</strong></p> */}
+                        <div className="d-flex justify-content-between">
+                            <div>
+                                {/* <p className="card-text"><strong>Check-in Date:</strong></p> */}
+                                <p className="card-text">{formatDate(checkinDate)}</p>
+                            </div>
+                            <div>
+                                {/* <p className="card-text"><strong>Check-out Date:</strong></p> */}
+                                <p className="card-text">{formatDate(checkoutDate)}</p>
+                            </div>
+                            <div>
+                                {/* <p className="card-text"><strong>Total:</strong></p> */}
+                                <p className="card-text">&#8377; {total}</p>
+                            </div>
+                            
                         </div>
-                        </div>
-                        </div>
-                        </div>
-    )
-
+                        <p className="card-text"><strong>Quantity: </strong>{quantity}</p>
+                        {/* <p className="card-text">&#8377; {total}</p> */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default ViewCart;
