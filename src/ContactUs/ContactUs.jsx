@@ -52,54 +52,64 @@ const ContactUs = () => {
     };
 
     return (
-        <div className="contactUs-bg-image bg-container" style={{height:'100vh'}}>
-        <div className="container mt-5">
+        <div className="contactUs-bg-image bg-container" style={{minHeight: '100vh', display: 'flex', flexDirection: 'column'}}>
             <Menu/>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name:</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="fromEmail">Email:</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="fromEmail"
-                        name="fromEmail"
-                        value={formData.fromEmail}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="message">Message:</label>
-                    <textarea
-                        className="form-control"
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                    ></textarea>
-                </div>
-                {error && <p className="text-danger">{error}</p>}
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        </div>
+            <div className="container mt-5 flex-grow-1">
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label htmlFor="name">Name:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="fromEmail">Email:</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="fromEmail"
+                            name="fromEmail"
+                            value={formData.fromEmail}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message">Message:</label>
+                        <textarea
+                            className="form-control"
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            required
+                        ></textarea>
+                    </div>
+                    {error && <p className="text-danger">{error}</p>}
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+            </div>
             <SocialConnections/>
             
-            {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31111.68433280033!2d77.62522305100914!3d12.910257643548075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1491bfdc6ecd%3A0xf232718439fbc879!2sHSR%20Layout%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1739805051114!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
-            {/* <GoogleMap/> */}
-        <Footer/>
+            <div className="container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243646.16199970688!2d77.44071589411742!3d12.9701541450064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670b1c45e33%3A0x84ed238c9e225f32!2sMG%20Road%2C%20Bengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1615389216343!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="450" 
+                    style={{border:0}} 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <Footer/>
         </div>
     );
 };

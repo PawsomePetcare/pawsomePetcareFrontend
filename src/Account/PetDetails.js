@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { BASEURL } from '../Constants/Constants';
 
 function PetDetails({ pets, updatePet, userId }) {
     const [selectedPet, setSelectedPet] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [initialPets, setInitialPets] = useState([]);
+    const [dobError, setDobError] = useState('');
 
     const handleEdit = (pet) => {
         setSelectedPet(pet);
@@ -13,15 +15,48 @@ function PetDetails({ pets, updatePet, userId }) {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+        if (name === 'dob') {
+            const selectedDate = new Date(value);
+            const today = new Date();
+            if (selectedDate > today) {
+                setDobError('Date of birth must be in the past');
+            } else {
+                setDobError('');
+            }
+        }
         setSelectedPet(prevState => ({
             ...prevState,
             [name]: type === 'checkbox' ? checked : value
         }));
     };
 
+    useEffect(() => {
+        fetch(`${BASEURL}/api/pets/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let allPets = [...data];
+            setInitialPets(allPets);
+        })
+        .catch(error => console.error('Error fetching pet data:', error));
+    }, [userId, pets]);
+
     const handleSave = (e) => {
         e.preventDefault();
-        selectedPet.userId = userId
+        if (dobError) {
+            alert('Please correct the errors before submitting');
+            return;
+        }
+        selectedPet.userId = userId;
         fetch(`${BASEURL}/api/pets/${selectedPet.id}`, {
             method: 'PUT',
             headers: {
@@ -29,7 +64,12 @@ function PetDetails({ pets, updatePet, userId }) {
             },
             body: JSON.stringify(selectedPet)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(updatedPet => {
             alert('Pet updated successfully');
             updatePet(updatedPet);
@@ -46,10 +86,9 @@ function PetDetails({ pets, updatePet, userId }) {
 
     return (
         <div className="container mt-5">
-
             <div>
-            {pets.length==0 && <h5>No pets are regsitered</h5>}
-                {pets.map(pet => (
+                {initialPets.length === 0 && <h5>No pets are registered</h5>}
+                {initialPets.map(pet => (
                     <div key={pet.id} className="card mb-3">
                         <div className="card-body">
                             <h5 className="card-title">{pet.name}</h5>
@@ -93,6 +132,7 @@ function PetDetails({ pets, updatePet, userId }) {
                                     className="form-control"
                                     required
                                 />
+                                {dobError && <small className="form-text text-danger">{dobError}</small>}
                             </div>
                             <div className="form-group">
                                 <label>Medications being used</label>

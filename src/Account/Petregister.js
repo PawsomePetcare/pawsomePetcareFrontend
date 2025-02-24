@@ -11,9 +11,19 @@ function PetRegister({ addPet, userId }) {
         receivedTickVaccine: false,
         receivedRabiesVaccine: false
     });
+    const [dobError, setDobError] = useState('');
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+        if (name === 'dob') {
+            const selectedDate = new Date(value);
+            const today = new Date();
+            if (selectedDate > today) {
+                setDobError('Date of birth must be in the past');
+            } else {
+                setDobError('');
+            }
+        }
         setPet(prevState => ({
             ...prevState,
             [name]: type === 'checkbox' ? checked : value
@@ -22,8 +32,12 @@ function PetRegister({ addPet, userId }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (dobError) {
+            alert('Please correct the errors before submitting');
+            return;
+        }
         pet.userId = userId;
-        fetch(BASEURL+'/api/pets', {
+        fetch(BASEURL + '/api/pets', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -49,7 +63,6 @@ function PetRegister({ addPet, userId }) {
 
     return (
         <div className="container mt-5">
-
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Pet Name</label>
@@ -72,6 +85,7 @@ function PetRegister({ addPet, userId }) {
                         className="form-control"
                         required
                     />
+                    {dobError && <small className="form-text text-danger">{dobError}</small>}
                 </div>
                 <div className="form-group">
                     <label>Medications being used</label>
